@@ -1,0 +1,26 @@
+{% extends "new.html" %}
+{% block title %}
+Signup
+{% endblock %}
+{% block im %}
+<br><br><br><br><br>
+
+<center>
+	{% if registered %}
+		Thanks for registering
+	{% else %}
+
+	<form action="/register/" method="POST" id="StudentForm" enctype="multipart/form-data">
+	{% csrf_token %}
+	<h2>Please Enter your details to signup</h2>
+	<br>
+	{{ user_form.as_p }}
+	{{ profile_form.as_p }}
+	
+	<input type="submit" name="submit" value="Signup"/>
+	</form>
+	{% endif %}
+</center>
+
+<br><br><br>
+{% endblock %}

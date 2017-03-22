@@ -1,0 +1,33 @@
+{% extends "new.html" %}
+{% block title %}
+Important Info
+{% endblock %}
+{% block im %}
+<div class="w3-content w3-display-container" style="max-width:100%" padding-top="0" padding-right="0" padding-left="0" padding-bottom="0">
+  {% load static %}<img class="mySlides w3-animate-fading" src="{% static 'ITW/bhu1.jpg' %}" style="width:100% height:100%">
+  {% load static %}<img class="mySlides w3-animate-fading" src="{% static 'ITW/Computer.jpg' %}" style="width:100% height:100%">
+  {% load static %}<img class="mySlides w3-animate-fading" src="{% static 'ITW/Transformers 3.jpg' %}" style="width:100% height:100%">
+  {% load static %}<img class="mySlides w3-animate-fading" src="{% static 'ITW/Transformers 4.jpg' %}" style="width:100% height:100%">
+  <div class="w3-center w3-section w3-large w3-text-white w3-display-bottomleft" style="width:100%">
+    <div class="w3-section">
+       <button class="w3-btn" onclick="plusDivs(-1)"> < Prev</button>
+       <button class="w3-btn" onclick="plusDivs(1)">Next > </button>
+    </div>
+    <button class="demo w3-btn" onclick="currentDiv(1)">1</button>
+    <button class="demo w3-btn" onclick="currentDiv(2)">2</button>
+    <button class="demo w3-btn" onclick="currentDiv(3)">3</button>
+	<button class="demo w3-btn" onclick="currentDiv(4)">4</button>
+	<br>
+	<br>
+  </div>
+</div>
+
+<div>
+<table>
+{% for i in newslist %}
+	<tr><td>{{ i.Date }}</td><td>-{{ i.Time }}</td><td>-{{ i.Content }}</td></tr>
+
+{% endfor %}
+</table>
+</div>
+{% endblock %}

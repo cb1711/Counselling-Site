@@ -1,0 +1,131 @@
+{% extends "new.html" %}
+{% block script %}
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #2c3e50;
+    text-align: left;
+    padding: 8px;
+}
+th
+{
+	background-color: #1abc9c;
+	color:#ecf0f1;
+}
+
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+</style>
+{% endblock %}
+{% block title %}
+Profile
+{% endblock %}
+{% block im %}
+<br><br><br><br><br>
+
+{% csrf_token %}
+<center>
+<h3>MY PROFILE</h3>
+{% if type %}
+<table>
+<tr>
+<th>Name</th>
+<th>EmailID</th>
+<th>Mobile</th>
+<th>Branch</th>
+<th>RollNumber</th>
+</tr>
+{% for i in profile %}
+<tr>
+	<td>{{ i.student.username }}</td>
+	<td>{{ i.student }}</td>
+	<td>{{ i.Mobile }}</td>
+	<td>{{ i.Branch }}</td>
+	<td>{{ i.RollNumber }}</td>
+</tr>
+	<br>
+{% endfor %}
+
+</table>
+<br>
+
+<table>
+{% if appointment %}
+<h3>MY APPOINTMENTS</h3>
+<table>
+<tr>
+<th>Date</th>
+<th>Time</th>
+<th>Counsellor</th>
+</tr>
+
+	{% for i in appointment %}
+		<tr>
+		<td>{{ i.Date }}</td><td>{{ i.Time }}</td><td>{{ i.Counsellor.counsellor.username }}</td>
+		<br>
+		</tr>
+	{% endfor %}
+
+</table>
+{% else %}
+<h3>YOU DON'T HAVE ANY APPOINTMENT IN THE FUTURE</h3>
+{% endif %}
+{% else %}
+<table>
+<tr>
+<th>Name</th>
+<th>EmailID</th>
+<th>Mobile</th>
+<th>Type</th>
+
+</tr>
+{% for i in profile %}
+<tr>
+	<td>{{ i.counsellor.username }}</td>
+	<td>{{ i.counsellor }}</td>
+	<td>{{ i.Mobile }}</td>
+	<td>{{ i.Type }}</td>
+</tr>
+	<br>
+{% endfor %}
+
+</table>
+<br>
+{% if appointment %}
+<h3>MY APPOINTMENTS</h3>
+<table>
+<tr>
+<th>Date</th>
+<th>Time</th>
+<th>Student</th>
+</tr>
+
+	{% for i in appointment %}
+		<tr>
+		<td>{{ i.Date }}</td><td>{{ i.Time }}</td><td>{{ i.Student.username }}</td>
+		
+		<br>
+		</tr>
+	{% endfor %}
+
+</table>
+{% else %}
+	<h3>YOU DON'T HAVE ANY APPOINTMENT IN THE FUTURE</h3>
+{% endif %}
+{% endif %}
+
+	
+
+</center>
+<br><br><br>
+{% endblock %}

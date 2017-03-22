@@ -1,0 +1,41 @@
+{% extends "new.html" %}
+{% block title %}
+Appointment
+{% endblock %}
+{% block im %}
+<!-- insert form action at the time of backend -->
+<br><br><br><br><br>
+{% if rejected %}
+<center><b>The Requested Timeslot is already booked</b></center>
+{% else %}
+{% if booked %}
+<center><b>Appointment Booked</b></center>
+{% else %}
+<form action="/appointment/" method="POST">{% csrf_token %}
+<center>
+	<label for="Type">Counselling Type:</label><br>
+	<select id="Type" name="type">
+		<option value="Emotional">Emotional</option>
+		<option value="Academic">Academic</option>
+	</select>
+	<br><br>
+	<label>Date:</label><br>
+	<input type="date" name="date" required>
+	<br><br>
+	<label>Time:</label><br>
+	<select id="time" name="time">
+		<option value="4">4:00</option>
+		<option value="4.5">4:30</option>
+		<option value="5">5:00</option>
+		<option value="5.5">5:30</option>
+	</select>
+	<br><br>
+	<input type="submit" value="BOOK">
+	
+</center>
+</form>
+
+{% endif %}
+{% endif %}
+{% endblock %}
+

@@ -1,0 +1,9 @@
+3
+select instructor,sum(x) from course_table c,(SELECT COUNT(STUDENT_ID) as x,COURSE_ID FROM marks_table WHERE MARKS<=40 GROUP BY COURSE_ID) q where c.course_id=q.course_id group by instructor;
+
+2.
+SELECT NAME FROM student_table a where a.STUDENT_ID IN (SELECT DISTINCT STUDENT_ID FROM marks_table where MARKS<=33) AND a.STUDENT_ID IN(SELECT DISTINCT STUDENT_ID FROM marks_table a,(SELECT MAX(MARKS) as Z,COURSE_ID AS C FROM marks_table group by COURSE_ID) b where a.MARKS=b.Z and a.COURSE_ID=b.C);
+
+
+1.
+select distinct student_id from marks_table a,(select count(student_id) x,student_id as z from marks_table w where w.marks<=33 group by student_id) b where a.student_id=b.z and b.x>=3;

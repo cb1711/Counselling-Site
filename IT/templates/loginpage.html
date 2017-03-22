@@ -1,0 +1,27 @@
+{% extends "new.html" %}
+{% block title %}
+Login
+{% endblock %}
+{% block im %}
+<br><br><br><br><br>
+<form id="login_form" action=".?next={{ redirect_to }}" method="POST">
+{% csrf_token %}
+<center>
+	<h2>Please Login with your IIT-BHU ID</h2>
+	<br>
+	<label>EmailID:</label><br>
+	<input type="text" name="username" placeholder="Enter Username" required>
+	<br><br>
+	<label>Password:</label><br>
+	<input type="password" name="password" placeholder="Enter password" required>
+	<br><br>
+	<input type="submit" value="Login">
+
+	<br>
+	
+<a href="/register/">New User</a>
+</center>
+</form>
+	
+<br><br><br>
+{% endblock %}

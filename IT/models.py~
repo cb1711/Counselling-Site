@@ -1,0 +1,73 @@
+from __future__ import unicode_literals
+
+from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+# Create your models here.
+class Student(models.Model):
+	YEARS = ("2012", "2013","2014","2015","2016")
+		
+	student=models.OneToOneField(User)
+	Branch=models.CharField(max_length=30)
+	Year=models.CharField( max_length=4,choices=YEARS)
+	RollNumber=models.CharField(max_length=10)
+	Mobile=models.CharField(max_length=10)
+	
+	def __str__(self):
+		return self.name+" "+self.RollNumber
+	
+	def __unicode__(self):
+        return self.user.username
+
+	def login(ID,Password):
+		try:
+			pwd=Student.objects.filter(ID__equals=ID)
+			if Password==pwd.Password:
+				return 1
+			else:
+				return 0
+		except:
+			return 0
+	
+		
+
+class Counsellor(models.Model):
+	counsellor=models.OneToOneField(User)
+	Type=models.CharField(max_length=30)
+	Mobile=models.CharField(max_length=10)
+	def __unicode__(self):
+        return self.user.username
+	def create(name,sex,ID,Password,Type,Mobile):
+		Counsellor.objects.create(name=name, sex=sex, ID=ID, Password=Password, Type=Type,Mobile=Mobile)
+	def __str__(self):
+		return self.name+" "+self.ID
+
+class Appointment(models.Model):
+	Student=models.ForeignKey(Student,on_delete=models.CASCADE)
+	Counsellor=models.ForeignKey(Counsellor,on_delete=models.CASCADE)
+	Date=models.DateField()
+	Time=models.TimeField()
+	def __str__(self):
+		return self.Counsellor+" "+self.Student+" "+self.Date
+
+class Feedback(models.Model):
+	Serial=models.AutoField(primary_key=True)
+	Student=models.ForeignKey(Student,on_delete=models.CASCADE)
+	feedback=models.CharField(max_length=200)
+	Date=models.DateField()
+	Time=models.TimeField()
+
+class News(models.Model):
+	Content=models.CharField(max_length=300)
+	Date=models.DateField()
+	Time=models.TimeField()
+	Serial=models.AutoField(primary_key=True)
+	def __str__(self):
+		return self.Content
+	
+
+	
+
+	

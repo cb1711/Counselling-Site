@@ -1,0 +1,102 @@
+{% extends "new.html" %}
+
+
+{% block title %}
+CHAT
+{% endblock %}
+{% block script %}
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript">
+    window.addEventListener("load", function() {
+        
+        // create websocket instance
+        var mySocket = new WebSocket("ws://192.168.43.54:8080/ws");
+        var sender= "{{sender}}"
+		var to="{{to}}"
+		mySocket.onopen=function(){
+			
+			mySocket.send(sender+":"+to);
+		};
+        // add event listener reacting when message is received
+        mySocket.onmessage = function (event) {
+			var di=document.createElement("div");
+            di.innerHTML=event.data;
+			di.className="msg_a";
+            // put text into our output div
+			var a=document.getElementById("mssg");
+			var bfr=document.getElementById("push");
+		
+			a.insertBefore(di,bfr);
+			a.scrollTop=a.scrollHeight;
+						
+        };
+        var form = document.getElementsByClassName("foo");
+        var input = document.getElementById("input");
+		input.addEventListener('keydown',function(e){
+			if(e.keyCode===13) {
+				input_text = input.value;
+            	mySocket.send(input_text);
+				input.value=""
+				var di=document.createElement("div");
+            	di.innerHTML=input_text;
+				di.className="msg_b";
+            	// put text into our output div
+				var a=document.getElementById("mssg");
+				var bfr=document.getElementById("push");
+		
+				a.insertBefore(di,bfr);
+				a.scrollTop=a.scrollHeight;
+	
+				
+            	e.preventDefault()
+				}
+		});
+        		
+
+    });
+</script>
+
+{% endblock %}
+{% block im %}
+	
+	<br>
+	<br>
+	
+	<br>
+    	
+<div class="msg_box" >
+	<div class="msg_head">{{ to }}
+	
+	</div>
+<div class="msg_body" id="mssg">
+	{% for i in history %}
+		{% if i.Email == sender %}
+			<div class="msg_b">{{ i.Text }}</div>
+		{% else %}
+			<div class="msg_a">{{ i.Text }}</div>
+		{% endif %}
+	
+	<script>
+	var a=document.getElementById("mssg");
+	a.scrollTop=a.scrollHeight;
+	</script>
+	{% endfor %}
+
+	<div class="msg_wrap">
+	
+	
+	</div>
+		
+			
+    		<div class="msg_push" id="push"></div>
+			</div>
+	<form class="foo">
+	<textarea id="input" class="msg_input" ></textarea>
+	
+	
+	</form>
+</div>
+</div>
+    
+
+{% endblock %}

@@ -1,0 +1,149 @@
+
+<!DOCTYPE HTML>
+
+<html>
+<head>
+
+<title>
+{% block title %}
+
+{% endblock %}
+</title>
+{% load static %}
+<link rel="icon" href="{% static 'ITW/itbhu.ico' %}" type="image/x-icon">
+
+<link rel="stylesheet" type="text/css" href="{% static 'ITW/pro.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'ITW/Background.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'ITW/appointment.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'ITW/style.css' %}" />
+
+
+
+</head>
+<body>
+<header>
+	<div class="row">
+		<div class="head">
+			<div class="col-2">
+				{% load static %}<img src="{% static 'ITW/logo_img.png' %}" height="130px" width="130px"/>
+			</div>
+			<div class="col-7">
+				<center>
+					<ul class="heading">
+						<li><h2 class="comicsans">Counselling Service</h2></li>
+						<li><a class="head" href="http://www.iitbhu.ac.in">IIT Varanasi<br></a></li>
+					</ul>
+				</center>
+			</div>
+		</div>
+		<div class="col-2">
+		</div>
+	</div>
+<ul class="topnav" id="myTopnav">
+  <li><a class="active" href="/home">Home</a></li>
+  <li class="dropdown"><a class="dropbtn">Student Support</a>
+	<div class="dropdown-content">
+      <a href="/academic">Academic Support</a>
+      <a href="/emotional">Emotional Counselling</a>
+    </div>
+  </li>
+  <li ><a href="/newstudents" class="dropbtn">New Students</a>
+  </li>
+  <li ><a href="/info" class="dropbtn">Important Info</a>
+ 	
+  </li>
+ <li><a href="/appointment">Book Appointment</a>
+  </li>
+{% if request.user.is_authenticated %}
+  
+  
+<li><a href="/chat">Counselling Room</a></li>
+<li><a href="/profile">{{ request.user.username }}</a></li>
+<li><a href="/logout">Logout</a></li>
+{% else %}
+   <li><a href="/login">Login/Signup</a></li>
+	
+{% endif %}
+  <li class="icon">
+    <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">=</a>
+  </li>
+</ul>
+</header>
+{% block im %}
+{% endblock %}
+<div class="row">
+</div>
+<br>
+<div class="separator">
+	<center>We would love to hear from you<br>
+	<a class="button" href="/feedback">Feedback</a>
+	</center></div>
+<footer>
+	<div class="foot">	
+		<ul class="linkc">
+		<li><h3>Quick Links</h3></li>
+		<li><a class="footer" href="http://www.iitbhu.ac.in">IIT BHU</a></li>
+		<li><a class="footer" href="#">Dean of Student Affairs</a></li>
+		<li><a class="footer" href="#">Dean of Academic Affairs</a></li>
+		</ul>
+		<div class="bottom-right">
+	<a href="http://www.facebook.com" class="head"><div class="app"></div></a>
+	</div>
+	</div>
+</footer>
+{% block script %}
+
+{% endblock %}
+<script>
+var slideIndex = 0;
+carousel();
+function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
+function plusDivs(n) {
+	slideIndex += n
+	showDivs();
+}
+function currentDiv(n) {
+	slideIndex = n
+	showDivs();
+}
+function showDivs() {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  if (slideIndex > x.length) {slideIndex = 1}
+  if (slideIndex < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+     dots[i].className = dots[i].className.replace(" w3-red", "");
+  }
+  x[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " w3-red";
+}
+function carousel() {
+	var i;
+	var x = document.getElementsByClassName("mySlides");
+	var dots = document.getElementsByClassName("demo");
+	for (i = 0; i < x.length; i++) {
+		x[i].style.display = "none";
+	}
+	for (i = 0; i < dots.length; i++) {
+		dots[i].className = dots[i].className.replace(" w3-red", "");
+	}
+	slideIndex +=1;
+	if (slideIndex > x.length) {slideIndex = 1}
+    x[slideIndex-1].style.display = "block";
+	dots[slideIndex-1].className += " w3-red";
+    setTimeout(carousel, 9000);
+}
+</script>
+</body>
+</html>

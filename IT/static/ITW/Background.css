@@ -1,0 +1,75 @@
+.mySlides {
+	display:none
+}
+
+.w3-content{
+	max-width:980px;
+	margin:auto;
+
+}
+
+.w3-display-container{
+	position:relative;
+	
+	max-width: 500px;
+}
+
+.w3-animate-fading{
+	-webkit-animation:fading 10s infinite;
+	animation:fading 10s infinite;
+}
+@-webkit-keyframes fading{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+@keyframes fading{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+
+.w3-center{
+	text-align:center
+}
+
+.w3-section{
+	margin-top:16px;
+	margin-bottom:16px;
+
+}
+
+.w3-large{
+	font-size:18px
+}
+
+.w3-text-white{
+	color:white
+}
+
+.w3-display-bottomleft{
+	position:absolute;
+	left:0;
+	bottom:0
+}
+
+.w3-btn{
+	border:none;
+	display:inline-block;
+	outline:0;
+	padding:9px 16px;
+	vertical-align:middle;
+	overflow:hidden;
+	text-decoration:none;
+	color:white;
+	background-color:black;
+	text-align:center;
+	cursor:pointer;
+	white-space:nowrap;
+	-webkit-transition:background-color 3s,color .2s,box-shadow 0.2s,opacity 0.2s;
+	transition:background-color 3s,color .2s,box-shadow 0.2s,opacity 0.2s
+}
+
+.w3-btn:hover{
+	box-shadow:0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+	-webkit-transition:background-color 0.5s;
+	transition:background-color 0.5s;
+	background-color:gray
+}
+
+.w3-red{
+	color:white;
+	background-color:red
+}

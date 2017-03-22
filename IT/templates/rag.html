@@ -1,0 +1,20 @@
+{% extends "newstudents_ug.html" %}
+
+{% block content %}
+<center>
+<div class="msg_box">
+<form action="" method="post" enctypr="text/plain">
+{% csrf_token %}
+<label>Name:</label>
+<br>
+<input name="name" placeholder="Enter your name" class="msg_input" required> 
+<br><br>
+<label>Complaint:</label>
+<br>
+<textarea class="email_input" name="complain" required> </textarea>
+<br><br>
+<input type="submit" value="SUBMIT">
+</form>
+<div class="msg_box">
+</center>
+{% endblock %}
